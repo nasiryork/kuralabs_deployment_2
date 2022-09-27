@@ -20,18 +20,14 @@ pipeline {
         py.test --verbose --junit-xml test-reports/results.xml
         ''' 
       }
-    
+
       post{
         always {
           junit 'test-reports/results.xml'
         }
-       
+
       }
     }
-     stage ('Deploy') {
-       steps {
-         sh '/var/lib/jenkins/workspace/url-shortener_main/eb deploy {{url-shortener-main-dev}}'
-       }
-    }
+
   }
  }
