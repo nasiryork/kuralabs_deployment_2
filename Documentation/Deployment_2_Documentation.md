@@ -64,7 +64,7 @@ Jenkins was used to track the entire pipeline for our application.
 
 ## Slack:
 - Using a Jenkins Plugin I was able to configure jenkins to send me a notification with the result of the recent build.
-![image]()
+![image](https://github.com/nasiryork/kuralabs_deployment_2/blob/main/static/deployment_pictures/Slack%20Notification.png)
 
 ## Elastic Beanstalk CLI:
 - With the success of the Jenkins deployment I was able to run eb init and eb create within the EC2 terminal to Launch the Elastic Beanstalk environment.   
@@ -81,7 +81,7 @@ Here are the results of the successful deployments.
 ![image](https://github.com/nasiryork/kuralabs_deployment_2/blob/main/static/deployment_pictures/DataDog%20Email%20Alert.png)
 
 ## Deployment Diagram:
-![image]()
+![image](https://github.com/nasiryork/kuralabs_deployment_2/blob/main/Deployment%202%20Custom%20CICD%20Pipeline.png)
 
 ## Challenges:
 Throughout this deployment there were 3 main stages where I got stuck on. 
@@ -89,7 +89,7 @@ Throughout this deployment there were 3 main stages where I got stuck on.
 ```
 nano ~/.profile
 export PATH=~/.local/bin:$PATH
-
+source ~/.profile
 ```
 - I ran into two problems in regards to my Jenkins pipeline. Initially I did not install Python’s venv which didn’t allow me to pass my test stage. 
 - The second problem that I ran into was the correct syntax for my Deploy stage.
