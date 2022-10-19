@@ -7,7 +7,7 @@
 - EC2, Jenkins, GitHub, IAM, AWS CLI, Elastic Beanstalk CLI, Elastic Beanstalk, Slack, DataDog
 
 ## EC2: 
-- First I started off by launching a new Amazon EC2 Instance. I opened ports 8080, 80, and 22 to allow for Jenkins to run, Http access, and SSH access. In order to run Jenkins I needed to Install its main dependency being Java. After my EC2 booted up I created a jenkins User. I needed to add the newly created Jenkins user to the sudoers list (located: ~/etc/sudoers) to grant it administrative permission. I then Installed Python3, Pip, and Python-venv since I was deploying a Python application as well as .AWS and Elastic Beanstalk CLI.
+- First I started off by launching a new Amazon EC2 Instance. I opened ports 8080, 80, and 22 to allow for Jenkins to run, Http access, and SSH access. In order to run Jenkins I needed to Install its main dependency being Java. After my EC2 booted up I created a jenkins User. I needed to add the newly created Jenkins user to the sudoers list (located: ~/etc/sudoers) to grant it administrative permission. I then Installed Python3, Pip, and Python-venv since I was deploying a Python application as well as AWS and Elastic Beanstalk CLI.
 
 ## IAM:
 - I then launched Amazon IAM to create an Amazon user that we could assign permission to in order to configure and access the application we want to deploy.
@@ -54,13 +54,11 @@ stage ('Deploy') {
          sh '/var/lib/jenkins/.local/bin/eb deploy url-shortener-main-dev'
        }
 ```
-
 ## Jenkins:
 Jenkins was used to track the entire pipeline for our application.
 - I chose a multibranch pipeline and connected my forked repo to jenkins. 
 - Below is a successful deployment of all three stages created in the JenkinsFile. 
 ![image](https://github.com/nasiryork/kuralabs_deployment_2/blob/main/static/deployment_pictures/Jenkins%20Custom%20Pipeline.png)
-
 
 ## Slack:
 - Using a Jenkins Plugin I was able to configure jenkins to send me a notification with the result of the recent build.
@@ -85,7 +83,7 @@ Here are the results of the successful deployments.
 
 ## Challenges:
 Throughout this deployment there were 3 main stages where I got stuck on. 
-= Originally I could not get the path for my jenkins user to locate the elastic beanstalk cli download. This was solved once I created a profile file amd :
+- Originally I could not get the path for my jenkins user to locate the elastic beanstalk cli download. This was solved once I created a profile file, exported the new path and sourced the file.:
 ```
 nano ~/.profile
 export PATH=~/.local/bin:$PATH
