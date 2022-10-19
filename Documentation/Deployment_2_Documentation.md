@@ -1,4 +1,4 @@
-<h1 align=center>Deployment 3 Documentation</h1>
+<h1 align=center>Deployment 2 Documentation</h1>
 
 ## Deployment goal:
 - Learn to set up a custom CI/CD Pipeline/ Deployment CLI Integration
@@ -11,7 +11,8 @@
 
 ## IAM:
 - I then launched Amazon IAM to create an Amazon user that we could assign permission to in order to configure and access the application we want to deploy.
-![image]()
+![image](https://github.com/nasiryork/kuralabs_deployment_2/blob/main/static/deployment_pictures/IAM%20User.png)
+
 ## AWS CLI:
 - I used the Access Key ID and Secret Access Key from the IAM user EB_User along with my region (us-east-1) and output format (json) to configure aws access to our EC2. 
 
@@ -31,7 +32,7 @@ stage ('Build') {
         flask run &
         '''
 ```
-- The test stage run py.test and posts its results. 
+- The test stage run the py.test file and posts its results. 
 ```
 stage ('test') {
       steps {
@@ -58,32 +59,37 @@ stage ('Deploy') {
 Jenkins was used to track the entire pipeline for our application.
 - I chose a multibranch pipeline and connected my forked repo to jenkins. 
 - Below is a successful deployment of all three stages created in the JenkinsFile. 
-![image]()
+![image](https://github.com/nasiryork/kuralabs_deployment_2/blob/main/static/deployment_pictures/Jenkins%20Custom%20Pipeline.png)
 
 
 ## Slack:
--Using a Jenkins Plugin I was able to configure jenkins to send me a notification with the result of the recent build.
+- Using a Jenkins Plugin I was able to configure jenkins to send me a notification with the result of the recent build.
 ![image]()
 
 ## Elastic Beanstalk CLI:
--With the success of the Jenkins deployment I was able to run eb init and eb create within the EC2 terminal to Launch the Elastic Beanstalk environment.   
+- With the success of the Jenkins deployment I was able to run eb init and eb create within the EC2 terminal to Launch the Elastic Beanstalk environment.   
 
 ## Elastic Beanstalk:
 Here are the results of the successful deployments. 
--Elastic Beanstalk created an environment to run and host the application. 
--The application was set up correctly and was accessible through the elastic beanstalk generated link.
-![image]()
+- Elastic Beanstalk created an environment to run and host the application. 
+- The application was set up correctly and was accessible through the elastic beanstalk generated link.
+![image](https://github.com/nasiryork/kuralabs_deployment_2/blob/main/static/deployment_pictures/Elastic%20Beanstalk%20Deploy.png)
 
 ## DataDog
--I used DataDog to notify me via email if the EC2 running Jenkins was powered down or not responding.
-![image]()
-![image]()
+- I used DataDog to notify me via email if the EC2 running Jenkins was powered down or not responding.
+![image](https://github.com/nasiryork/kuralabs_deployment_2/blob/main/static/deployment_pictures/DataDog%20Monitor.png)
+![image](https://github.com/nasiryork/kuralabs_deployment_2/blob/main/static/deployment_pictures/DataDog%20Email%20Alert.png)
 
 ## Deployment Diagram:
 ![image]()
 
 ## Challenges:
 Throughout this deployment there were 3 main stages where I got stuck on. 
-=Originally I could not get the path for my jenkins user to locate the elastic beanstalk cli download. This was solved once I created the ~/.profile, exported another path (export PATH=~/.local/bin:$PATH), and sourced the file. 
--I ran into two problems in regards to my Jenkins pipeline. Initially I did not install Python’s venv which didn’t allow me to pass my test stage. 
--The second problem that I ran into was the correct syntax for my Deploy stage.
+= Originally I could not get the path for my jenkins user to locate the elastic beanstalk cli download. This was solved once I created a profile file amd :
+```
+nano ~/.profile
+export PATH=~/.local/bin:$PATH
+
+```
+- I ran into two problems in regards to my Jenkins pipeline. Initially I did not install Python’s venv which didn’t allow me to pass my test stage. 
+- The second problem that I ran into was the correct syntax for my Deploy stage.
